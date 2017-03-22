@@ -1,0 +1,58 @@
+---
+title: "Final Project Proposal"
+author: "Emily Nield"
+date: "March 22, 2017"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+**Group Members:** No Group, only Emily Nield. If help is required on the aeolian side, then Emily will consult Stephen Sutton or Devon Burr.
+
+**Project Type:** Data Analysis
+
+**Git Workflow:** Centralized Workflow
+
+
+## Introduction
+
+Since Bagnold's seminal work in the 1940's, wind tunnels have been used to study aeolian geomorphology as it allows the user to have complete control over the system. One of the primary instruments in every wind tunnel is the pitot tube that sits inside the tunnel which is connected to a transducer and is used to determine the wind speed inside the tunnel. When an experiment is run in a wind tunnel the transducer connected to the pitot tube is outputting voltages for the entire length of the experiment. These voltages can fluctuate due to noise. Aeolian geomorphologists aren't interested in the voltages, we want the wind speed. To get the wind speed one has to use the calibration curves provided by the manufacturer of the transducer to convert these voltages to a dynamic pressure. These dynamic pressures are then converted to wind speed.
+
+This whole process can typically be done in a single spreadsheet, what makes it complicated is that we are not using a normal wind tunnel. I am working with Titan Wind Tunnel, which is unique because one can change the atmospheric pressure inside the tunnel, it can go as high as 20 bar. The atmospheric pressure also slightly changes throughout the experiment. There are two transducers connected to the pitot tube inside the tunnel (Tavis 1 and Tavis 2). We have set up multiple spreadsheets to convert the voltages from the transducer to wind speed. Each spreadsheet is designed for one transducer (either Tavis 1 or Tavis 2), and a certain atmospheric pressure that we have set the tunnel to run at (ex. 3 bar, 12.5 bar, 15 bar). The manufacturer of our transducers, Tavis, has sent us calibration data to convert to dynamic pressure from a voltage. All the calibration data is subdivided by the atmospheric pressure that the calibration was done at (ex. 1 bar, 5 bar, 10 bar). We find the correct calibration for the atmospheric pressure we are running our experiment under by interpolating between two curves that Tavis provided us (ex. we want to know the correct calibration to use for 3 bar, we will interpolate this data using the 1 and 5 bar calibration curves).
+
+After the voltages are converted to a dynamic pressure, it is easy to convert it to a wind speed. The wind speeds that are reported are filled with noise so we smooth them over a 2 second interval using a moving average to get an "interpolated wind speed." 
+
+While we are running a wind tunnel experiment we are looking inside the tunnel for the time at which the grains begin to move (threshold wind speed). We record the time that threshold occurs and then look up this time in the spreadsheet to find the wind speed of the tunnel at the moment of threshold. 
+
+Another complication in how data reduction is currently done is that we use four different units of pressure (psi, bar, mm Hg, and Pa) because the instrumentation that tells us the pressure inside the tunnel is reported in psi, and the calibration data from Tavis is mm, and we work with bars but convert everything to Pascals for calculation purposes. 
+
+This all sounds complicated and messy because it is. The data reduction was poorly set up at the beginning and it now needs to be streamlined in a computational program, such as R. 
+
+
+## Goal of Project
+
+To make data reduction as simple and streamlined as possible so that it easy to get the wind speed at a given time inside the wind tunnel. Want this program to be distributed among the Titan Wind Tunnel group (12 people) and any changes to the program will be tracked with Git Hub.
+
+Currently we have about 24 templates of the same spreadsheet all with minor differences so that we can convert voltages to free stream velocity. People in the group are constantly making changes to one of the templates without updating the rest of the templates. It is now a giant mess and a headache for the poor grad student (me) whose job is to go through all of these spreadsheets to double check them for mistakes and to find the wind speed at the time of threshold. An example of one of these spreadsheets is in the 590 project proposal folder.
+
+##Source of Data
+
+Data Emily has collected from the Titan Wind Tunnel at NASA Ames in Mountain View, CA. The data is in CSV format with two columns for transducer voltages and a column for the time the data was collected. The voltages are recorded every eighth of a second. A sample of the data is included in the 590 project proposal folder.
+
+## User Inputs
+
+I want the program to ask the user to manually enter the information into the console:
+
+* Name of the CSV file that contains the voltages and times recorded by Tavis 1 and 2.
+* Atmospheric pressure of tunnel
+* Temperature inside tunnel
+* Time threshold was observed to occur at
+
+##Program Outputs
+
+* Wind speed at threshold
+* Summary of all the inputs that the user types into the console
+
+##Flowchart of Data Reduction
+
+Attached as a seperate document in the 590 project proposal folder.
