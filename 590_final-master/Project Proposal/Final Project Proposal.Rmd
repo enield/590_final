@@ -50,7 +50,7 @@ I want the program to ask the user to manually enter the information into the co
 
 ##Program Outputs
 
-* Wind speed at threshold
+* Wind speed at threshold, calculated using both Tavis 1 and Tavis 2 transducer, so there will be two wind speeds
 * Summary of all the inputs that the user types into the console
 
 ##Flowchart of Data Reduction
