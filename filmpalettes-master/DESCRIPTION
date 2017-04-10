@@ -1,0 +1,12 @@
+Package: filmpalettes
+Title: Film Palette Generator
+Version: 0.0.0.9000
+Authors@R: person("Emily", "Nield", email = "enield@vols.utk.edu", role = c("aut", "cre"))
+Description: Creates palettes for plots inspired by famous films
+Depends: R (>= 3.3.0)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    ggplot2
+RoxygenNote: 6.0.1
